@@ -1,7 +1,9 @@
-FROM alpine:3.10
+FROM google/dart:2
 
-COPY LICENSE README.md /
+COPY . /action
 
-COPY entrypoint.sh /entrypoint.sh
+RUN cd /action/scripts && chmod +x *.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+RUN cd /action/app && pub get
+
+ENTRYPOINT [ "dart", "/action/app/bin/main.dart" ]

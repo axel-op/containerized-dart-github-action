@@ -1,12 +1,17 @@
-name: 'Container Action Template'
-description: 'Get started with Container actions'
-author: 'GitHub'
-inputs: 
-  myInput:
-    description: 'Input to use'
-    default: 'world'
+name: "Hello World"
+description: "Greet someone and record the time"
+inputs:
+  who-to-greet: # id of input
+    description: "Who to greet"
+    required: true
+    default: "World"
+outputs:
+  time: # id of output
+    description: "The time we we greeted you"
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.myInput }}
+  using: "docker"
+  image: "Dockerfile"
+  # Those override the ENTRYPOINT defined in the Dockerfile
+  pre-entrypoint: "/action/scripts/setup.sh"
+  entrypoint: "/action/scripts/main.sh"
+  post-entrypoint: "/action/scripts/cleanup.sh"

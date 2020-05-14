@@ -1,0 +1,16 @@
+name: Example workflow
+
+on: push
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+
+    # No container to build here
+
+    steps:
+      - uses: axel-op/containerized-dart-action@master
+        id: dart-action
+        with:
+          who-to-greet: "you"
+      - run: echo 'The time was ${{ steps.dart-action.outputs.time }}'

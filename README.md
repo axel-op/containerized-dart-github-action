@@ -1,5 +1,36 @@
-# Container Action Template
+# Hello world Dart action
 
-To get started, click the `Use this template` button on this repository [which will create a new repository based on this template](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/).
+A "Hello World" GitHub Action coded in Dart.
 
-For info on how to build your first Container action, see the [toolkit docs folder](https://github.com/actions/toolkit/blob/master/docs/container-action.md).
+This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+
+The Dart application is located in the [`app`](./app) folder. The shell scripts under [`scripts`](scripts) are used to run it using the `dart` command.
+
+## Inputs
+
+### `who-to-greet`
+
+**Required** The name of the person to greet. Default `"World"`.
+
+## Outputs
+
+### `time`
+
+The time we greeted you.
+
+## Example usage
+
+```yaml
+jobs:
+  example:
+    runs-on: ubuntu-latest
+
+    # No need to build a container here!
+
+    steps:
+      - uses: axel-op/containerized-dart-action@master
+        id: dart-action
+        with:
+          who-to-greet: "Mona the Octocat"
+      - run: echo 'The time was ${{ steps.dart-action.outputs.time }}'
+```
