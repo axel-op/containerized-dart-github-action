@@ -12,6 +12,6 @@ runs:
   using: "docker"
   image: "Dockerfile"
   # Those override the ENTRYPOINT defined in the Dockerfile
-  pre-entrypoint: "/action/scripts/setup.sh"
+  pre-entrypoint: "/action/scripts/setup.sh" # Delete this line to not run the setup script
   entrypoint: "/action/scripts/main.sh"
-  post-entrypoint: "/action/scripts/cleanup.sh"
+  post-entrypoint: "/action/scripts/cleanup.sh" # Delete this line to not run the cleanup script
